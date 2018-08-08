@@ -10,17 +10,35 @@ def create_table():
 def insert(item,quantity,price):
     conn=sqlite3.connect("lite.db")
     cur=conn.cursor()
-    conn.execute("INSERT INTO store VALUES(?,?,?)",(item,quantity,price))
+    cur.execute("INSERT INTO store VALUES(?,?,?)",(item,quantity,price))
+    conn.commit()
+    conn.close()
+
+def delete(item):
+    conn=sqlite3.connect("lite.db")
+    cur=conn.cursor()
+    cur.execute("DELETE FROM store WHERE item=(?)",(item,))
     conn.commit()
     conn.close()
 
 def view():
     conn=sqlite3.connect("lite.db")
     cur=conn.cursor()
-    conn.execute("SELECT * FROM store")
+    cur.execute("SELECT * FROM store")
     rows=cur.fetchall()
     conn.close()
     return rows
 
-insert("Milk Glass",8,9.9)
-print(view())
+choice=input("Press 1 to enter data \n Press 2 to delete data \n Press 3 to view data \n")
+if choice == "1":
+    item=input("Enter the name of ITEM ")
+    quantity=int(input("Enter Quantity "))
+    price=float(input("Enter Price "))
+    insert(item,quantity,price) # or insert("Wine Glass",2,30.5)
+
+elif choice == "2":
+    item=input("Enter the name of ITEM to delete ")
+    delete(item) # or insert("Wine Glass")
+
+elif choice == "3":
+    print(view())
