@@ -17,7 +17,7 @@ def example1():
 def example2():
     fig = plt.figure()
     axes1 = fig.add_axes([.1,.1,.8,.8])
-    axes2 = fig.add_axes([.2,.5,.2,.2])
+    axes2 = fig.add_axes([.2,.2,.2,.2])
     axes1.plot(x,y)
     axes1.set_title("large graph")
     axes2.plot(x,y)
