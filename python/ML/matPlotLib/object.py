@@ -21,7 +21,7 @@ def example2():
     axes1.plot(x,y)
     axes1.set_title("large graph")
     axes2.plot(x,y)
-    axes1.set_title("small graph")
+    axes2.set_title("small graph")
     plt.show()
 
 
