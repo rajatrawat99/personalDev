@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: alexa-cicd
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: keshawilliams
+Implementation-Vendor-Id: com.keysoft.alex
+Created-By: IntelliJ IDEA
+Build-Jdk: 9
+Main-Class: ${start-class}
+
