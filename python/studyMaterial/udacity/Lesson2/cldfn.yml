@@ -1,0 +1,10 @@
+Parameters: 
+
+  EnviromentName:
+    Description: An enviroment name that will prefixed to all the resources
+    Type: String
+
+  VpcCIDER:
+    Description: Please enter the IP range
+    Type: String
+    Default: 10.0.0.0/16
