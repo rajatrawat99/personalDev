@@ -8,3 +8,37 @@ Parameters:
     Description: Please enter the IP range
     Type: String
     Default: 10.0.0.0/16
+
+Resources:
+  UdacityVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDER
+      EnableDnsSupport: 'true'
+      EnableDnsHostnames: 'true'
+      Tags:
+        - Key: Name 
+          Value: !Ref EnviromentName
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+          - Key: Name 
+            Value: !Ref EnviromentName
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref UdacityVPC
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref UdacityVPC
+      AvailabilityZone: !Select [0, !GetAZs '']
+      CiderBlock: !Ref PublicSubnet1CIDR
+      MapPublicIpOnLaunch: false
+      Tags:
+        

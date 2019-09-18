@@ -1,6 +1,8 @@
 #object oriented approach
 import matplotlib.pyplot as plt
 import numpy as np
+import plotly.plotly as py
+import cufflinks as cf
 
 x = np.linspace(0,5,10)
 y = x ** 2
