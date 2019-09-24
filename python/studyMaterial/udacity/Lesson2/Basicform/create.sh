@@ -7,3 +7,5 @@ aws cloudformation create-stack \
 
 
 aws cloudformation update-stack --stack-name ourdemoinfra --template-body file://cldfn.yml --parameters file://ourInfra-params.json --region=us-west-2
+
+aws cloudformation create-stack --stack-name demoserverstack --template-body file://demoserver.yml --parameters file://demoserver.json --region=us-west-2
