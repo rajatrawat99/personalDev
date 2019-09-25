@@ -201,8 +201,8 @@ Resources:
             !Sub "${EnvironmentName}-VPCID"
         SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 81
-          ToPort: 81
+          FromPort: 80
+          ToPort: 80
           CidrIp: 0.0.0.0/0
         SecurityGroupEgress:
         - IpProtocol: tcp
@@ -219,8 +219,8 @@ Resources:
             !Sub "${EnvironmentName}-VPCID"
         SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: 8080
-          ToPort: 8080
+          FromPort: 80
+          ToPort: 80
           CidrIp: 0.0.0.0/0
         - IpProtocol: tcp
           FromPort: 22
@@ -282,7 +282,7 @@ Resources:
        - Type: "forward"
          TargetGroupArn: !Ref MyTargetGroups
      LoadBalancerArn: !Ref MyLoadBalancer
-     Port: 81
+     Port: 80
      Protocol: "HTTP"
 
   MyListenerRule:
@@ -300,12 +300,12 @@ Resources:
   MyTargetGroups:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
     Properties: 
-      HealthCheckIntervalSeconds: 10
+      HealthCheckIntervalSeconds: 100
       HealthCheckPath: /
       HealthCheckProtocol: HTTP
-      HealthCheckTimeoutSeconds: 8
+      HealthCheckTimeoutSeconds: 80
       HealthyThresholdCount: 2
-      Port: 80
+      Port: 8080
       Protocol: HTTP
       UnhealthyThresholdCount: 5
       VpcId: !Ref vpcUdacity
