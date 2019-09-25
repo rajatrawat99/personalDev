@@ -1,3 +1,6 @@
+Description: 
+  Deployment for only private subnets
+
 Parameters: 
 
   EnvironmentName:
@@ -37,7 +40,7 @@ Resources:
         VpcId: !Ref UdacityVPC
         AvailabilityZone: !Select [0, !GetAZs '']
         CidrBlock: !Ref PrivateSubnet1CIDR
-        MapPublicIpOnLaunch: false
+        MapPublicIpOnLaunch: true
         Tags:
             - Key: Name
               Value: !Sub ${EnvironmentName} Private Subnet (AZ1)

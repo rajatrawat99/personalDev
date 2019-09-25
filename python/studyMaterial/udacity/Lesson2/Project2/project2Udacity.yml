@@ -263,6 +263,53 @@ Resources:
         Ref: MyServerGroupConfig
       MinSize: '4'
       MaxSize: '5'
+      TargetGroupARNs:
+      - Ref: MyTargetGroups
+
+  MyLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      SecurityGroups:
+      - Ref: LBSecGroup
+      Subnets:
+      - !Ref PublicSubnet1
+      - !Ref PublicSubnet2
+
+  MyListener:
+   Type: "AWS::ElasticLoadBalancingV2::Listener"
+   Properties:
+     DefaultActions:
+       - Type: "forward"
+         TargetGroupArn: !Ref MyTargetGroups
+     LoadBalancerArn: !Ref MyLoadBalancer
+     Port: 80
+     Protocol: "HTTP"
+
+  MyListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+        - Type: forward
+          TargetGroupArn: !Ref MyTargetGroups
+      Conditions:
+        - Field: path-pattern
+          Values: [/]
+      ListenerArn: !Ref MyListener
+      Priority: 1
+
+  MyTargetGroups:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties: 
+      HealthCheckIntervalSeconds: 100
+      HealthCheckPath: /
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 80
+      HealthyThresholdCount: 5
+      Port: 8080
+      Protocol: HTTP
+      UnhealthyThresholdCount: 5
+      VpcId: !Ref vpcUdacity
+
 
 
 Outputs: 
